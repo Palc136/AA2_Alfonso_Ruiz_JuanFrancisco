@@ -1,0 +1,71 @@
+.filter-section {
+  background-color: #3c39db34;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #3c39db34;
+  
+  .input-group-text {
+    background-color: #f0b05d;
+    border-color: #f0b05d;
+    color: #141414;
+  }
+}
+
+.empty-state {
+  padding: 40px 20px;
+  
+  i {
+    opacity: 0.5;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .filter-section {
+    .row > div {
+      margin-bottom: 10px;
+    }
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+// Mejoras visuales para los selects
+.form-select {
+  cursor: pointer;
+  
+  option {
+    background-color: #3c39db34;
+    color: white;
+  }
+}
+
+// Estilos para la paginación
+.pagination {
+  .page-link {
+    background-color: #3c39db34;
+    border-color: #3c39db34;
+    color: #f0b05d;
+    
+    &:hover {
+      background-color: #f0b05d;
+      border-color: #f0b05d;
+      color: #141414;
+    }
+  }
+  
+  .page-item.active .page-link {
+    background-color: #f0b05d;
+    border-color: #f0b05d;
+    color: #141414;
+  }
+  
+  .page-item.disabled .page-link {
+    background-color: #2a2a2a;
+    border-color: #3c39db34;
+    color: #757575;
+  }
+}

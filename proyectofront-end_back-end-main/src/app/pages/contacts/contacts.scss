@@ -1,0 +1,23 @@
+.contact-info {
+  background: #3c39db34;
+  border-radius: 8px;
+  padding: 30px;
+  height: 100%;
+
+  .contact-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+
+    i {
+      color: #f0b05d;
+      width: 20px;
+    }
+  }
+}
+
+.contact-form {
+  background: #3c39db34;
+  border-radius: 8px;
+  padding: 30px;
+}

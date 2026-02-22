@@ -1,0 +1,11 @@
+<div class="movie-card" (click)="navigateToDetail()">
+  <div class="position-relative">
+    <img [src]="movie.image" [alt]="movie.title">
+  </div>
+  <div class="movie-info">
+    <div class="movie-title">{{ movie.title }}</div>
+    <div class="movie-year">{{ movie.year }}</div>
+    <div class="movie-genre">{{ movie.genre }}</div>
+    <div class="rating">{{ getRatingStars(movie.rating) }}</div>
+  </div>
+</div>

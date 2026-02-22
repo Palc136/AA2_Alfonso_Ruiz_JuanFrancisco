@@ -1,0 +1,86 @@
+<div class="container my-4">
+  <button class="btn btn-outline-light back-to-list" (click)="goBack()">
+    <i class="fas fa-arrow-left me-2"></i>Volver al listado
+  </button>
+  
+  <div class="movie-detail" *ngIf="movie">
+    <div class="row">
+      <div class="col-12 col-md-4 mb-4">
+        <img [src]="movie.image" [alt]="movie.title" class="movie-poster">
+        <div class="mt-3 text-center">
+          <button class="btn btn-outline-warning me-2" (click)="toggleFavorite()">
+            <i class="fas" [class.fa-heart]="isFavorite()" [class.fa-heart-broken]="!isFavorite()"></i> 
+            {{ isFavorite() ? 'Eliminar de favoritos' : 'Agregar a favoritos' }}
+          </button>
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <h1>{{ movie.title }}</h1>
+        <div class="mb-3">
+          <span class="badge bg-secondary me-2">{{ movie.year }}</span>
+          <span class="badge bg-primary me-2">{{ movie.genre }}</span>
+          <span class="rating">{{ getRatingStars(movie.rating) }}</span>
+        </div>
+        <p class="lead">{{ movie.synopsis }}</p>
+        
+        <h4 class="mt-4">Reparto principal</h4>
+        <div class="row">
+          <div *ngFor="let actor of movie.cast" class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+            <div class="cast-member">
+              <img [src]="actor.image" [alt]="actor.name">
+              <div class="actor-name">{{ actor.name }}</div>
+              <div class="character-name">{{ actor.character }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Sección de comentarios -->
+  <div class="comment-section" *ngIf="movie">
+    <h3 class="section-title">Comentarios</h3>
+    
+    <div class="mb-4">
+      <form (ngSubmit)="addComment()">
+        <div class="row">
+          <div class="col-12 col-md-6 mb-3">
+            <label for="comment-author" class="form-label">Tu nombre</label>
+            <input type="text" class="form-control" id="comment-author" [(ngModel)]="newComment.author" name="author" required>
+          </div>
+          <div class="col-12 col-md-6 mb-3">
+            <label for="comment-rating" class="form-label">Tu calificación</label>
+            <select class="form-select" id="comment-rating" [(ngModel)]="newComment.rating" name="rating" required>
+              <option value="">Selecciona una calificación</option>
+              <option value="5">★★★★★ Excelente</option>
+              <option value="4">★★★★ Muy buena</option>
+              <option value="3">★★★ Buena</option>
+              <option value="2">★★ Regular</option>
+              <option value="1">★ Mala</option>
+            </select>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="comment-text" class="form-label">Tu comentario</label>
+          <textarea class="form-control" id="comment-text" rows="3" [(ngModel)]="newComment.text" name="text" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Publicar comentario</button>
+      </form>
+    </div>
+    
+    <div id="comments-container">
+      <div *ngIf="comments.length === 0" class="text-center py-4">
+        <p>No hay comentarios aún. Sé el primero en comentar.</p>
+      </div>
+      
+      <div *ngFor="let comment of comments" class="comment">
+        <div class="comment-header">
+          <div class="comment-author">{{ comment.author }}</div>
+          <div class="comment-date">{{ comment.date }}</div>
+        </div>
+        <div class="comment-rating">{{ getRatingStars(comment.rating) }}</div>
+        <div class="comment-text">{{ comment.text }}</div>
+      </div>
+    </div>
+  </div>
+</div>

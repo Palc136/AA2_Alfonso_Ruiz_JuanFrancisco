@@ -1,0 +1,44 @@
+<div class="container my-4">
+  <h2 class="section-title">Contáctanos</h2>
+  
+  <div class="row">
+    <div class="col-12 col-md-6 mb-4">
+      <div class="contact-info">
+        <h4>Información de Contacto</h4>
+        <div class="contact-item">
+          <i class="fas fa-envelope me-2"></i>
+          <span>info@cineplus.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone me-2"></i>
+          <span>+1 (555) 123-4567</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt me-2"></i>
+          <span>123 Cinema Street, Ciudad</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-md-6">
+      <div class="contact-form">
+        <h4>Envíanos un mensaje</h4>
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="contactForm.name" name="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="contactForm.email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="message" rows="4" [(ngModel)]="contactForm.message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

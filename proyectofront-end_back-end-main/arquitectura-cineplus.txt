@@ -1,0 +1,390 @@
+═══════════════════════════════════════════════════════════════
+   DOCUMENTACIÓN DE ARQUITECTURA - CINEPLUS
+═══════════════════════════════════════════════════════════════
+
+PROYECTO: CinePlus - Sistema de Gestión de Películas
+TIPO DE ARQUITECTURA: Arquitectura por Capas (Layered Architecture)
+FRAMEWORK: Angular 21 + Bootstrap 5
+BASE DE DATOS: MySQL 8.0
+
+
+═══════════════════════════════════════════════════════════════
+   1. DESCRIPCIÓN GENERAL
+═══════════════════════════════════════════════════════════════
+
+CinePlus es una aplicación web de tipo SPA (Single Page Application) 
+desarrollada en Angular que implementa una arquitectura por capas, 
+separando las responsabilidades en tres capas principales:
+
+1. Capa de Presentación (Presentation Layer)
+2. Capa de Lógica de Negocio (Business Logic Layer)
+3. Capa de Datos (Data Layer)
+
+Esta separación permite:
+✓ Código más mantenible y escalable
+✓ Reutilización de componentes
+✓ Facilita pruebas unitarias
+✓ Preparación para integración con backend
+
+
+═══════════════════════════════════════════════════════════════
+   2. ARQUITECTURA POR CAPAS
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│                  CAPA DE PRESENTACIÓN                       │
+│                    (Components + Views)                      │
+├─────────────────────────────────────────────────────────────┤
+│  COMPONENTES PRINCIPALES:                                   │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  Header Component       → Navegación principal      │    │
+│  │  Footer Component       → Pie de página             │    │
+│  │  Movie Card Component   → Tarjeta de película       │    │
+│  │  Movie Detail Component → Detalle de película       │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  PÁGINAS (VIEWS):                                          │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  Home Component      → Página principal             │    │
+│  │  Movies Component    → Catálogo con filtros         │    │
+│  │  Favorites Component → Películas favoritas          │    │
+│  │  Contacts Component  → Formulario de contacto       │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ARCHIVOS: *.html, *.scss, *.ts (vista y lógica UI)       │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        │ Consume servicios
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│              CAPA DE LÓGICA DE NEGOCIO                      │
+│                      (Services)                             │
+├─────────────────────────────────────────────────────────────┤
+│  SERVICIOS:                                                 │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  MovieService                                       │    │
+│  │  - getMovies()           → Obtener todas películas  │    │
+│  │  - getMovieById(id)      → Obtener por ID           │    │
+│  │  - filterMovies()        → Filtrar por criterios    │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  StorageService                                     │    │
+│  │  - getFavorites()        → Obtener favoritos        │    │
+│  │  - saveFavorites()       → Guardar favoritos        │    │
+│  │  - getComments()         → Obtener comentarios      │    │
+│  │  - addComment()          → Agregar comentario       │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  RESPONSABILIDADES:                                         │
+│  - Lógica de negocio de la aplicación                     │
+│  - Validaciones                                             │
+│  - Transformación de datos                                  │
+│  - Preparado para consumir APIs REST (futuro backend)      │
+│                                                             │
+│  ARCHIVOS: services/*.ts                                    │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        │ Usa modelos
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   CAPA DE DATOS                             │
+│              (Models + Data Access)                         │
+├─────────────────────────────────────────────────────────────┤
+│  MODELOS (INTERFACES):                                      │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  Movie Interface                                    │    │
+│  │  - id: number                                       │    │
+│  │  - title: string                                    │    │
+│  │  - year: number                                     │    │
+│  │  - genre: string                                    │    │
+│  │  - rating: number                                   │    │
+│  │  - cast: CastMember[]                               │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  CastMember Interface                               │    │
+│  │  - name: string                                     │    │
+│  │  - character: string                                │    │
+│  │  - image: string                                    │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ┌────────────────────────────────────────────────────┐    │
+│  │  Comment Interface                                  │    │
+│  │  - author: string                                   │    │
+│  │  - rating: number                                   │    │
+│  │  - text: string                                     │    │
+│  │  - date: string                                     │    │
+│  └────────────────────────────────────────────────────┘    │
+│                                                             │
+│  ALMACENAMIENTO ACTUAL:                                     │
+│  - localStorage (navegador) para favoritos y comentarios   │
+│  - Datos hardcodeados en MovieService (temporal)           │
+│                                                             │
+│  ARCHIVOS: models/*.ts                                      │
+└───────────────────────┬─────────────────────────────────────┘
+                        │
+                        │ Futuro: Conexión con
+                        ▼
+┌─────────────────────────────────────────────────────────────┐
+│                  BASE DE DATOS (MySQL)                      │
+│                    (Diseñada - No conectada)                │
+├─────────────────────────────────────────────────────────────┤
+│  TABLAS PRINCIPALES:                                        │
+│  - usuarios          → Gestión de usuarios                 │
+│  - peliculas         → Catálogo de películas               │
+│  - generos           → Clasificación por género            │
+│  - actores           → Base de datos de actores            │
+│  - reparto_pelicula  → Relación películas-actores (N:N)   │
+│  - favoritos         → Lista de favoritos por usuario      │
+│  - comentarios       → Reseñas y calificaciones            │
+│  - contacto          → Mensajes del formulario             │
+│                                                             │
+│  ESTADO: Diseñada y lista para implementar backend         │
+└─────────────────────────────────────────────────────────────┘
+
+
+═══════════════════════════════════════════════════════════════
+   3. FLUJO DE DATOS EN LA APLICACIÓN
+═══════════════════════════════════════════════════════════════
+
+EJEMPLO: Usuario busca una película
+
+1. [PRESENTACIÓN] Usuario escribe en el buscador (MoviesComponent)
+   ↓
+2. [PRESENTACIÓN] Componente captura el evento (ngModel)
+   ↓
+3. [LÓGICA] Llama a MovieService.filterMovies(searchTerm)
+   ↓
+4. [LÓGICA] Servicio filtra datos según criterio
+   ↓
+5. [DATOS] Servicio accede a los datos (actualmente en memoria)
+   ↓
+6. [LÓGICA] Servicio retorna resultados filtrados
+   ↓
+7. [PRESENTACIÓN] Componente recibe datos y actualiza vista
+   ↓
+8. [PRESENTACIÓN] Usuario ve resultados en pantalla
+
+
+═══════════════════════════════════════════════════════════════
+   4. VENTAJAS DE ESTA ARQUITECTURA
+═══════════════════════════════════════════════════════════════
+
+✓ SEPARACIÓN DE RESPONSABILIDADES
+  Cada capa tiene un propósito específico y bien definido
+
+✓ MANTENIBILIDAD
+  Es fácil localizar y modificar funcionalidades específicas
+
+✓ ESCALABILIDAD
+  Preparado para agregar nuevas funcionalidades sin afectar otras
+
+✓ REUTILIZACIÓN
+  Los servicios pueden ser usados por múltiples componentes
+
+✓ TESTABILIDAD
+  Cada capa puede ser probada independientemente
+
+✓ PREPARADO PARA BACKEND
+  La estructura facilita la integración futura con APIs REST
+
+
+═══════════════════════════════════════════════════════════════
+   5. ESTRUCTURA DE CARPETAS
+═══════════════════════════════════════════════════════════════
+
+src/
+├── app/
+│   ├── components/              → CAPA DE PRESENTACIÓN
+│   │   ├── header/
+│   │   ├── footer/
+│   │   ├── movie-card/
+│   │   └── movie-detail/
+│   │
+│   ├── pages/                   → CAPA DE PRESENTACIÓN (Vistas)
+│   │   ├── home/
+│   │   ├── movies/
+│   │   ├── favorites/
+│   │   └── contacts/
+│   │
+│   ├── services/                → CAPA DE LÓGICA
+│   │   ├── movie.service.ts
+│   │   └── storage.service.ts
+│   │
+│   ├── models/                  → CAPA DE DATOS (Modelos)
+│   │   └── movie.ts
+│   │
+│   ├── app.routes.ts           → Configuración de rutas
+│   ├── app.config.ts           → Configuración global
+│   └── app.ts                  → Componente raíz
+│
+├── styles.scss                 → Estilos globales
+└── index.html                  → Punto de entrada HTML
+
+
+═══════════════════════════════════════════════════════════════
+   6. TECNOLOGÍAS UTILIZADAS
+═══════════════════════════════════════════════════════════════
+
+FRONTEND (Actual):
+------------------
+• Angular 21          → Framework principal
+• TypeScript 5.9      → Lenguaje de programación
+• Bootstrap 5.3       → Framework CSS
+• SCSS                → Preprocesador CSS
+• RxJS 7.8            → Programación reactiva
+
+HERRAMIENTAS DE DESARROLLO:
+---------------------------
+• Angular CLI 21      → Herramienta de línea de comandos
+• Node.js 22.x        → Entorno de ejecución
+• npm 11.x            → Gestor de paquetes
+• Visual Studio Code  → Editor de código
+
+BACKEND (Planificado):
+----------------------
+• Java 21             → Lenguaje de programación
+• Apache Tomcat 11    → Servidor de aplicaciones
+• JPA (Jakarta Persistence API) → Especificación ORM
+• Hibernate 6.6       → Implementación de JPA
+• Maven               → Gestor de dependencias
+• Gson                → Serialización JSON
+• MySQL Connector     → Driver JDBC
+
+BASE DE DATOS (Diseñada):
+-------------------------
+• MySQL 8.0           → Sistema de gestión de base de datos
+• phpMyAdmin          → Administración de base de datos
+
+
+═══════════════════════════════════════════════════════════════
+   7. PREPARACIÓN PARA BACKEND FUTURO
+═══════════════════════════════════════════════════════════════
+
+La arquitectura actual está preparada para implementar un backend
+completo con las siguientes tecnologías:
+
+BACKEND PLANIFICADO:
+--------------------
+• Java 21                    → Lenguaje de programación
+• Apache Tomcat 11           → Servidor de aplicaciones
+• JPA (Jakarta Persistence)  → Especificación ORM
+• Hibernate 6.6              → Implementación de JPA
+• Maven                      → Gestor de dependencias
+• Gson                       → Serialización JSON
+• MySQL Connector            → Driver JDBC
+
+BASE DE DATOS:
+--------------
+• MySQL 8.0                  → Base de datos relacional
+• phpMyAdmin                 → Administración visual
+
+El backend implementará una arquitectura por capas:
+- Servlets (API REST)
+- Services (Lógica de negocio)
+- Repositories (Acceso a datos con JPA)
+- Entidades (Modelos mapeados a tablas)
+
+La base de datos ya está diseñada con modelo entidad-relación
+completo, incluyendo 8 tablas y todas sus relaciones.
+
+
+═══════════════════════════════════════════════════════════════
+   8. INTEGRACIÓN FRONTEND-BACKEND (Futuro)
+═══════════════════════════════════════════════════════════════
+
+Cuando se implemente el backend, el frontend Angular se conectará
+mediante peticiones HTTP a la API REST:
+
+EJEMPLO DE ADAPTACIÓN:
+
+// Actual (datos hardcodeados)
+getMovies(): Movie[] {
+  return this.moviesData;
+}
+
+// Futuro (consumiendo API REST Java)
+getMovies(): Observable<Movie[]> {
+  return this.http.get<Movie[]>('http://localhost:8080/cineplus-backend/api/movies');
+}
+
+El backend responderá con JSON y el frontend lo consumirá de
+forma reactiva usando RxJS Observables.
+
+
+═══════════════════════════════════════════════════════════════
+   8. PATRONES DE DISEÑO IMPLEMENTADOS
+═══════════════════════════════════════════════════════════════
+
+1. PATRÓN SINGLETON
+   Los servicios en Angular son singleton por defecto
+   (providedIn: 'root')
+
+2. PATRÓN OBSERVER
+   Uso de RxJS para programación reactiva
+
+3. PATRÓN DEPENDENCY INJECTION
+   Inyección de dependencias nativa de Angular
+
+4. PATRÓN MVC (Model-View-Controller)
+   Componentes (View + Controller) + Modelos
+
+5. PATRÓN REPOSITORY (Preparado)
+   Servicios actúan como repositorios de datos
+
+
+═══════════════════════════════════════════════════════════════
+   9. FUNCIONALIDADES IMPLEMENTADAS
+═══════════════════════════════════════════════════════════════
+
+✓ Sistema de navegación con rutas
+✓ Catálogo de películas con tarjetas visuales
+✓ Filtrado por género y año
+✓ Búsqueda por título
+✓ Detalle completo de película (sinopsis, reparto, rating)
+✓ Sistema de favoritos (localStorage)
+✓ Sistema de comentarios con calificación
+✓ Formulario de contacto
+✓ Diseño responsive (Bootstrap)
+✓ Componentes reutilizables
+
+
+═══════════════════════════════════════════════════════════════
+   10. ESCALABILIDAD Y MEJORAS FUTURAS
+═══════════════════════════════════════════════════════════════
+
+BACKEND (Próxima fase):
+-----------------------
+□ API REST con Java + Tomcat
+□ Conexión a MySQL con JPA/Hibernate
+□ Autenticación de usuarios (JWT)
+□ Sistema de roles (admin, usuario)
+□ Panel de administración
+
+FUNCIONALIDADES ADICIONALES:
+-----------------------------
+□ Sistema de recomendaciones
+□ Historial de visualizaciones
+□ Compartir favoritos en redes sociales
+□ Notificaciones de nuevos estrenos
+□ Sistema de listas personalizadas
+
+
+═══════════════════════════════════════════════════════════════
+   CONCLUSIÓN
+═══════════════════════════════════════════════════════════════
+
+El proyecto CinePlus implementa exitosamente una arquitectura 
+por capas que separa claramente las responsabilidades entre 
+presentación, lógica de negocio y datos. Esta arquitectura 
+proporciona una base sólida y escalable que facilita el 
+mantenimiento y está completamente preparada para la futura 
+integración con un backend completo.
+
+La separación de capas permite que el desarrollo del backend 
+se realice de manera independiente sin afectar el frontend 
+existente, cumpliendo así con los requisitos de arquitectura 
+establecidos en la actividad académica.
+
+═══════════════════════════════════════════════════════════════

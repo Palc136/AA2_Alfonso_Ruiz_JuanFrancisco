@@ -1,0 +1,151 @@
+==================================================
+   INSTRUCCIONES PARA INICIAR EL PROYECTO FRONT END
+==================================================
+
+REQUISITOS PREVIOS (todos los sistemas)
+----------------------------------------
+Antes de empezar, asegúrate de tener instalado:
+
+1. Node.js (versión 18, 20 o 22)
+   Descarga: https://nodejs.org
+
+2. npm (viene incluido con Node.js)
+   Verificar con: npm -v
+
+3. Angular CLI
+   Instalar con: npm install -g @angular/cli
+   Verificar con: ng version
+
+
+==================================================
+   WINDOWS
+==================================================
+
+PASOS PARA INICIAR EL PROYECTO EN WINDOWS
+-------------------------------------------
+
+1. Descomprime el archivo ZIP
+   (clic derecho sobre el ZIP → Extraer todo)
+
+2. Abre la terminal:
+   - Presiona Windows + R
+   - Escribe "cmd" o "powershell" y presiona Enter
+
+3. Navega a la carpeta del proyecto:
+   ejemplo cd C:\Users\TuUsuario\Downloads\proyectoTransferencia-main
+   (ajusta la ruta según donde lo hayas descomprimido)
+
+4. Instala las dependencias (solo la primera vez):
+   npm install
+
+5. Inicia el servidor:
+   ng serve
+
+6. Abre el navegador en:
+   http://localhost:4200
+
+CONSEJO WINDOWS:
+   Puedes abrir la terminal directamente en la carpeta
+   del proyecto: mantén Shift + clic derecho dentro de
+   la carpeta → "Abrir ventana de PowerShell aquí"
+
+
+==================================================
+   MAC
+==================================================
+
+PASOS PARA INICIAR EL PROYECTO EN MAC
+---------------------------------------
+
+1. Descomprime el archivo ZIP
+   (doble clic sobre el archivo ZIP)
+
+2. Abre la terminal:
+   - Presiona Cmd + Espacio
+   - Escribe "Terminal" y presiona Enter
+
+3. Navega a la carpeta del proyecto:
+   cd ~/Downloads/proyectoTransferencia-main
+
+4. Instala las dependencias (solo la primera vez):
+   npm install
+
+5. Inicia el servidor:
+   ng serve
+
+6. Abre el navegador en:
+   http://localhost:4200
+
+CONSEJO MAC:
+   Puedes arrastrar la carpeta del proyecto directo
+   a la terminal después de escribir "cd " y soltarla,
+   se escribirá la ruta automáticamente.
+
+
+==================================================
+   LINUX (Ubuntu, Pop!_OS, Debian, etc.)
+==================================================
+
+PASOS PARA INICIAR EL PROYECTO EN LINUX
+-----------------------------------------
+
+1. Descomprime el archivo ZIP
+   (clic derecho → Extraer aquí)
+
+2. Abre la terminal (Ctrl + Alt + T)
+
+3. Navega a la carpeta del proyecto:
+   cd ~/Downloads/proyectoTransferencia-main
+
+4. Instala las dependencias (solo la primera vez):
+   npm install
+
+5. Inicia el servidor:
+   ng serve
+
+6. Abre el navegador en:
+   http://localhost:4200
+
+INSTALACIÓN DE NODE.JS EN LINUX (si no lo tienes):
+   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+   sudo apt install -y nodejs
+
+
+==================================================
+   NOTAS IMPORTANTES (todos los sistemas)
+==================================================
+
+- "npm install" solo se ejecuta UNA VEZ o cuando
+  alguien nuevo descargue el proyecto.
+
+- Los mensajes "WARNING" en la terminal son normales,
+  no afectan el funcionamiento de la app.
+
+- Para detener el servidor: presiona Ctrl + C en la terminal.
+
+- Si "ng serve" no funciona, prueba con:
+  npx ng serve
+
+
+==================================================
+   SOLUCIÓN DE PROBLEMAS COMUNES
+==================================================
+
+Error: "npm not found" o "npm is not recognized"
+→ Instala Node.js desde https://nodejs.org
+→ Reinicia la terminal después de instalar
+
+Error: "ng not found" o "ng is not recognized"
+→ Ejecuta: npm install -g @angular/cli
+→ En Windows puede requerir: Set-ExecutionPolicy RemoteSigned
+  (ejecutar PowerShell como administrador)
+
+Error: "Could not find package.json"
+→ Asegúrate de estar dentro de la carpeta del proyecto
+→ Verifica con "ls" (Mac/Linux) o "dir" (Windows)
+
+Error: "Port 4200 is already in use"
+→ Usa otro puerto: ng serve --port 4300
+→ Luego abre: http://localhost:4300
+
+==================================================

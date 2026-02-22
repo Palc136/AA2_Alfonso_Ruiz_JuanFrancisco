@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home">
+      <i class="fas fa-film me-2"></i>{{ title }}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/movies">Películas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/favorites">Favoritas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacts">Contactos</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Buscar película...">
+        <button class="btn btn-outline-light" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>

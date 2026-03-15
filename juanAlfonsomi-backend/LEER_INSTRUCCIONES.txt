@@ -1,0 +1,77 @@
+======================================================================
+         PROYECTO BACKEND: CINEPLUS - SISTEMA DE CARTELERA
+======================================================================
+
+1. DESCRIPCIÓN DEL PROYECTO
+---------------------------
+Este es el componente de servidor (Backend) para la plataforma CinePlus. 
+Está desarrollado en Java siguiendo una arquitectura multicapa (Servlet, 
+Service, Repository, Entity) para gestionar la lógica de negocio de 
+una cartelera de cine, incluyendo usuarios, películas, actores y favoritos.TENER EN CUANTA QUE ESTE BACKEND AUN NO ESTA ENTRELAZADO CON EL FRONT END DE ANGULAR AUN ESO ES EN LA ETAPA DE TRANZFERENCIA,
+
+TECNOLOGÍAS UTILIZADAS:
+- Lenguaje: Java 21 (JDK 21)
+- Servidor: Apache Tomcat 11.0.18
+- Gestión de dependencias: Maven
+- Persistencia: Jakarta Persistence (JPA) / Hibernate 6.4
+- Base de Datos: MySQL 8.x
+- Formato de intercambio: JSON (vía Google GSON)
+
+2. REQUISITOS PREVIOS
+---------------------
+Antes de iniciar, asegúrese de tener instalado:
+- MySQL Server y un gestor como phpMyAdmin.
+- NetBeans IDE (o similar con soporte para Maven).
+- Servidor Apache Tomcat 11 configurado en el IDE.
+
+3. PASOS PARA EL DESPLIEGUE (CONFIGURACIÓN)
+-------------------------------------------
+
+PASO A: Base de Datos
+1. Inicie su servidor MySQL.
+2. Importe el archivo 'database-script.sql' incluido en la carpeta de recursos.
+3. Asegúrese de que la base de datos se llame 'cineplus_db'.
+
+PASO B: Configuración de Conexión (Java)
+1. Vaya al archivo: src/main/resources/META-INF/persistence.xml
+2. Verifique que la propiedad 'jakarta.persistence.jdbc.url' termine en '/cineplus_db'.
+3. Verifique que 'user' y 'password' coincidan con sus credenciales de MySQL (usualmente root / sin contraseña).
+
+4. INICIO DEL SERVIDOR
+----------------------
+1. En NetBeans, haga clic derecho sobre el proyecto 'juanAlfonsomi-backend'.
+2. Seleccione la opción "Clean and Build" para limpiar versiones antiguas.
+3. Haga clic derecho nuevamente y seleccione "Run".
+4. Elija el servidor Apache Tomcat 11 cuando se le solicite.
+
+5. PRUEBAS DE FUNCIONAMIENTO (SIN FRONTEND)
+-------------------------------------------
+Para confirmar que el backend está operativo de forma independiente, abra su 
+navegador y pruebe los siguientes "endpoints". Debería ver una respuesta en 
+formato JSON:
+
+A) Probar lista de películas (GET):
+   URL: http://localhost:8080/juanAlfonsomi-backend/api/movies
+   Resultado esperado: Una lista de objetos JSON [...] con los datos de la DB.
+
+B) Probar respuesta del servidor:
+   URL: http://localhost:8080/juanAlfonsomi-backend/
+   Resultado esperado: Mensaje "Hello World" o página de inicio de Tomcat.
+
+C) Comprobar Filtro CORS:
+   Si al inspeccionar la página (F12 -> Network) ve el encabezado 
+   'Access-Control-Allow-Origin: http://localhost:4200', el backend está 
+   listo para recibir peticiones de Angular.
+
+6. SOLUCIÓN DE PROBLEMAS COMUNES
+--------------------------------
+- Error 500: Revise el log de NetBeans. Generalmente es por credenciales 
+  incorrectas en persistence.xml o tablas no creadas en MySQL.
+- Error 404: Verifique que el "Context Path" en las propiedades del proyecto 
+  sea exactamente /juanAlfonsomi-backend.
+- Error JSON vacío []: no es un error El sistema funciona, pero la base de datos no tiene 
+  registros porque aun no esta en lasado el back end con el front end(los datos de tablas de ejmplo por cada pelicula los tiene el front end de algula). Ejecute los INSERT de prueba en MySQL.
+
+======================================================================
+Desarrollado por: Juan Alfonso - 6to Semestre Ing. Software
+======================================================================

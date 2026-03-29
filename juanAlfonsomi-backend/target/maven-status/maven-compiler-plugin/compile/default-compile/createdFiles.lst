@@ -15,6 +15,7 @@ com/mycompany/juanalfonsomi/backend/model/Contact.class
 com/mycompany/juanalfonsomi/backend/service/GenereService.class
 com/mycompany/juanalfonsomi/backend/model/Movie.class
 com/mycompany/juanalfonsomi/backend/model/Favorite.class
+com/mycompany/juanalfonsomi/backend/servlet/MovieServlet$1.class
 com/mycompany/juanalfonsomi/backend/model/User.class
 com/mycompany/juanalfonsomi/backend/util/CorsFilter.class
 com/mycompany/juanalfonsomi/backend/service/ActorService.class
@@ -22,6 +23,7 @@ com/mycompany/juanalfonsomi/backend/repository/FavoriteRepository.class
 com/mycompany/juanalfonsomi/backend/servlet/GenreServlet.class
 com/mycompany/juanalfonsomi/backend/servlet/MovieCastServlet.class
 com/mycompany/juanalfonsomi/backend/model/Genere.class
+com/mycompany/juanalfonsomi/backend/servlet/MovieServlet$2.class
 com/mycompany/juanalfonsomi/backend/util/JPAUtil.class
 com/mycompany/juanalfonsomi/backend/servlet/FavoriteServlet.class
 com/mycompany/juanalfonsomi/backend/repository/UserRepository.class

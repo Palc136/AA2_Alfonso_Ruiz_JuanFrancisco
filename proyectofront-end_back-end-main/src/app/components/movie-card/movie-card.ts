@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router'
 import { Movie } from '../../models/movie';
+import { Router } from '@angular/router';
 
 @Component({
+  
   selector: 'app-movie-card',
-  templateUrl: './movie-card.html',
-  styleUrls: ['./movie-card.scss'],
   standalone: true,
-  imports: [CommonModule,]
+  imports: [CommonModule],
+  templateUrl: './movie-card.html',
+  styleUrls: ['./movie-card.scss']
 })
 export class MovieCardComponent {
   @Input() movie!: Movie;
@@ -21,8 +21,10 @@ export class MovieCardComponent {
   }
 
   getRatingStars(rating: number): string {
-    const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-    return '★'.repeat(fullStars) + (halfStar ? '½' : '');
+    const val = Math.floor(rating || 0);
+    return '★'.repeat(val) + '☆'.repeat(5 - val);
   }
+
+  
 }
+

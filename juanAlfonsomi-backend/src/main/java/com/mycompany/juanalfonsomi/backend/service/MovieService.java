@@ -26,6 +26,18 @@ public class MovieService {
         }
         // Si es válido, lo buscamos en la base de datos
         return movieRepository.findById(id);
+        
+    }
+    
+    public void saveMovie(Movie movie) {
+        try {
+            // Aquí le decimos al repositorio que inserte la película en la DB
+            movieRepository.save(movie); 
+            System.out.println("Película guardada exitosamente: " + movie.getTitulo());
+        } catch (Exception e) {
+            System.err.println("Error al guardar la película en el Service: " + e.getMessage());
+            throw e; // Re-lanzamos el error para que el Servlet sepa que falló
+        }
     }
 }
     

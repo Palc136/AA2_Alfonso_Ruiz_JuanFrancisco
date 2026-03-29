@@ -337,3 +337,4 @@ SELECT
 FROM peliculas p
 LEFT JOIN comentarios c ON p.id = c.pelicula_id
 GROUP BY p.id, p.titulo;
+

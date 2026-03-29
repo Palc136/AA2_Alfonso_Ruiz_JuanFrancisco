@@ -2,6 +2,9 @@
          PROYECTO BACKEND: CINEPLUS - SISTEMA DE CARTELERA
 ======================================================================
 
+
+URL proyecto: https://github.com/Palc136/AA2_Alfonso_Ruiz_JuanFrancisco.git  
+
 1. DESCRIPCIÓN DEL PROYECTO
 ---------------------------
 Este es el componente de servidor (Backend) para la plataforma CinePlus. 

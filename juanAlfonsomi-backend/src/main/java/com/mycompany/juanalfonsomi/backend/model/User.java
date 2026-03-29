@@ -22,7 +22,7 @@ public class User {
     private Boolean activo = true;
 
     // Constructor vacío obligatorio para JPA
-    public User(String trim, String trim1) {}
+    public User() {}
     
  // Constructor con datos
     public User(Integer id, String nombre, String email, String password, LocalDateTime fechaRegistro,Boolean activo) {
@@ -32,6 +32,10 @@ public class User {
         this.password = password;
         this.fechaRegistro = fechaRegistro;
         this.activo= activo;
+    }
+
+    public User(String trim, String trim0) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

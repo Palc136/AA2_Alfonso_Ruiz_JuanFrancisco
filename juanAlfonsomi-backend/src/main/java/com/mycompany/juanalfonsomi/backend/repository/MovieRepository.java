@@ -38,5 +38,23 @@ public class MovieRepository {
             em.close();
         }
     }
+    public void save(Movie movie) {
+        EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+        try {
+            em.getTransaction().begin(); // Iniciamos la transacción para escribir
+            
+            // persist() toma  objeto Movie y lo guarda automáticamente en la tabla
+            em.persist(movie); 
+            
+            em.getTransaction().commit(); // Confirmamos los cambios en MySQL
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Si algo falla, cancelamos para no romper la DB
+            }
+            System.err.println("Error al guardar la película: " + e.getMessage());
+        } finally {
+            em.close(); // Siempre cerramos la conexión
+        }
+    }
     
 }

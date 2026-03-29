@@ -4,6 +4,7 @@
  */
 package com.mycompany.juanalfonsomi.backend.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,10 +13,10 @@ import java.time.LocalDateTime;
 public class Genere {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Expose private Integer id;
     @Column(unique = true, nullable = false)
-    private String nombre;
-    private String descripcion;
+    @Expose private String nombre;
+    @Expose private String descripcion;
     
     public Genere() {}
 

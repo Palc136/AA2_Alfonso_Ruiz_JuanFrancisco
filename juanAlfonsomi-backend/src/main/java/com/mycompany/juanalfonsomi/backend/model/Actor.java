@@ -4,11 +4,13 @@
  */
 package com.mycompany.juanalfonsomi.backend.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -17,17 +19,19 @@ import java.time.LocalDate;
  * @author patch
  */
 @Entity
+@Table(name = "actores")
 public class Actor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String nombre;
-    private String imagen;
+    @Expose private Integer id;
+    @Expose private String nombre;
+    @Expose private String imagen;
     @Column(columnDefinition = "TEXT")
-    private String biografia;
+    @Expose private String biografia;
+    
     @Column(name = "fecha_nacimiento")
-    private java.time.LocalDate fechaNacimiento;
+    @Expose private java.time.LocalDate fechaNacimiento;
     // Getters y Setters...
 
     public Actor(){}
@@ -65,5 +69,50 @@ public class Actor implements Serializable {
     public String toString() {
         return "com.mycompany.juanalfonsomi.backend.model.Actor[ id=" + id + " ]";
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    
+    
     
 }
+
+

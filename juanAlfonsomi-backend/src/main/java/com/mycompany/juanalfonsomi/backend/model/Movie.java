@@ -4,6 +4,7 @@
  */
 package com.mycompany.juanalfonsomi.backend.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,30 +21,41 @@ import com.mycompany.juanalfonsomi.backend.model.Comment;
  * @author patch
  */
 @Entity
+@Table(name = "peliculas")
+
 public class Movie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String titulo;
-    private Integer anio;
+    @Column(name = "id")
+    @Expose private Integer id;
+    @Column(name = "titulo")
+    @Expose private String titulo;
+    @Column(name = "anio")
+    @Expose private Integer anio;
     @ManyToOne
     @JoinColumn(name = "genero_id")
-    private Genere genero;
-    private Double rating;
+    @Expose private Genere genero;
+    @Column(name = "rating")
+    @Expose private Double rating;
     @Column(name = "imagen_portada")
-    private String imagenPortada;
+    @Expose private String imagenPortada;
     @Column(columnDefinition = "TEXT")
-    private String sinopsis;
+    @Expose private String sinopsis;
 
     // Relación para traer los comentarios
-    @OneToMany(mappedBy = "pelicula")
-    private List<Comment> comentarios;
+    
+    @OneToMany(mappedBy = "pelicula", fetch = FetchType.EAGER)
+    @Expose private List<Comment> comentarios;
+    
+    @OneToMany(mappedBy = "pelicula", fetch = FetchType.EAGER) 
+    @Expose private List<MovieCast> reparto_pelicula;
    
     
-    public Movie() {}
+    public Movie() {
+    }
 
-    public Movie(Integer id, String titulo, Integer anio, Genere genero, Double rating, String imagenPortada, String sinopsis, List<Comment> comentarios) {
+    public Movie(Integer id, String titulo, Integer anio, Genere genero, Double rating, String imagenPortada, String sinopsis, List<Comment> comentarios, List<MovieCast> reparto_pelicula) {
         this.id = id;
         this.titulo = titulo;
         this.anio = anio;
@@ -52,7 +64,29 @@ public class Movie implements Serializable {
         this.imagenPortada = imagenPortada;
         this.sinopsis = sinopsis;
         this.comentarios = comentarios;
+        this.reparto_pelicula = reparto_pelicula;
     }
+
+    public Integer getAnio() {
+        return anio;
+    }
+
+    public List<MovieCast> getReparto_pelicula() {
+        return reparto_pelicula;
+    }
+
+    
+    
+    
+    public void setAnio(Integer anio) {
+        this.anio = anio;
+    }
+
+    public void setreparto_pelicula(List<MovieCast> reparto_pelicula) {
+        this.reparto_pelicula = reparto_pelicula;
+    }
+
+    
 
    
 

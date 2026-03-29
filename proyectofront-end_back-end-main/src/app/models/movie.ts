@@ -4,15 +4,17 @@ export interface CastMember {
   image: string;
 }
 
+
+// Tu interfaz Movie actualizada
 export interface Movie {
   id: number;
-  title: string;
-  year: number;
-  genre: string;
+  titulo: string;
+  anio: number;
+  genero: any;
   rating: number;
-  image: string;
-  synopsis: string;
-  cast: CastMember[];
+  imagenPortada: string; 
+  sinopsis: string;
+  reparto_pelicula: any[];   
 }
 
 export interface Comment {

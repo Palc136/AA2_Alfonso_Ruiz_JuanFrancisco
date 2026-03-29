@@ -4,13 +4,16 @@
  */
 package com.mycompany.juanalfonsomi.backend.model;
 
+import com.google.gson.annotations.Expose;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -18,20 +21,22 @@ import java.io.Serializable;
  * @author patch
  */
 @Entity
+@Table(name = "reparto_pelicula")
 public class MovieCast implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Expose private Integer id;
     @ManyToOne
     @JoinColumn(name = "pelicula_id")
-    private Movie pelicula;
-    @ManyToOne
-    @JoinColumn(name = "actor_id")
-    private Actor actor;
-    private String personaje;
+    @Expose private Movie pelicula;
+    // 
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name = "actor_id") // Nombre de la columna 
+@Expose private Actor actor;
+@Expose private String personaje;
     @Column(name = "orden_aparicion")
-    private Integer ordenAparicion;
+    @Expose  private Integer ordenAparicion;
     public MovieCast(){}
     public MovieCast(Integer id, Movie pelicula, Actor actor, String personaje, Integer ordenAparicion) {
         this.id = id;

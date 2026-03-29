@@ -56,7 +56,7 @@ PASO A: IMPORTACIÓN DE LA BASE DE DATOS
    se insertarán los datos iniciales.
 
 PASO B: CONFIGURACIÓN Y EJECUCIÓN DEL BACKEND (NetBeans)
-1. Abre el proyecto backend en NetBeans u otra erramienta que pueda ejecutara aplicacion web java.
+1. Abre el proyecto backend(carpeta: juanAlfonsomi-backend) en NetBeans u otra erramienta que pueda ejecutar aplicacion web java.
 2. Ve a src/main/resources/META-INF/persistence.xml y verifica que el 
    usuario y contraseña de MySQL sean los correctos para tu sistema.
 3. Haz clic derecho sobre el nombre del proyecto y selecciona 
@@ -65,7 +65,7 @@ PASO B: CONFIGURACIÓN Y EJECUCIÓN DEL BACKEND (NetBeans)
 5. Verifica el JSON en el navegador: http://localhost:8080/[tu-proyecto](juanAlfonsomi-backend)/api/movies
 
 PASO C: EJECUCIÓN DEL FRONTEND (Terminal)
-1. Abre una terminal en la carpeta raíz del proyecto frontend.
+1. Abre una terminal en la carpeta raíz del proyecto frontend(carpeta:proyectofront-end_back-end-main).
 2. Ejecuta: npm install (para descargar las dependencias).
 3. Ejecuta: ng serve (para iniciar el servidor de desarrollo).
 4. Abre el navegador en: http://localhost:4200

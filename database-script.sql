@@ -1,7 +1,3 @@
--- ═══════════════════════════════════════════════════════════════
--- SCRIPT DE CREACIÓN DE BASE DE DATOS - CINEPLUS
--- ═══════════════════════════════════════════════════════════════
-
 -- Crear base de datos
 CREATE DATABASE IF NOT EXISTS cineplus_db
 CHARACTER SET utf8mb4
@@ -46,7 +42,8 @@ CREATE TABLE peliculas (
     titulo VARCHAR(200) NOT NULL,
     anio INT NOT NULL,
     genero_id INT NOT NULL,
-    rating DECIMAL(2,1) NOT NULL DEFAULT 0.0,
+    -- FIX: DECIMAL(3,1) para soportar correctamente valores hasta 10.0
+    rating DECIMAL(3,1) NOT NULL DEFAULT 0.0,
     imagen_portada VARCHAR(255),
     sinopsis TEXT,
     fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -56,7 +53,9 @@ CREATE TABLE peliculas (
     INDEX idx_genero (genero_id),
     INDEX idx_rating (rating),
     CHECK (rating >= 0.0 AND rating <= 5.0),
-    CHECK (anio >= 1888 AND anio <= YEAR(CURDATE()) + 5)
+    -- FIX: CURDATE() no está permitida en CHECK constraints en MySQL.
+    -- Se reemplaza por un año máximo fijo. Actualizar según sea necesario.
+    CHECK (anio >= 1888 AND anio <= 2030)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
@@ -338,8 +337,3 @@ SELECT
 FROM peliculas p
 LEFT JOIN comentarios c ON p.id = c.pelicula_id
 GROUP BY p.id, p.titulo;
-
-
--- ═══════════════════════════════════════════════════════════════
--- FIN DEL SCRIPT
--- ═══════════════════════════════════════════════════════════════
